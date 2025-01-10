@@ -1,0 +1,3 @@
+// Optionally set `DEVELOPMENT_TEAM` and/or `CODE_SIGN_IDENTITY` in a private
+// configuration file.
+#include? "Private.xcconfig"
