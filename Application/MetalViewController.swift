@@ -59,7 +59,8 @@ extension MetalViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		if self.renderer != nil {
+		if let renderer = self.renderer {
+			renderer.setUp()
 			self.view.addGestureRecognizer(self._panGestureRecognizer)
 		} else {
 			let fallbackChild = self.makeFallbackChild()

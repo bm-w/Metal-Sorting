@@ -13,6 +13,7 @@
 		B63807E42D304B5E00505358 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63807DD2D304B5E00505358 /* MetalViewController.swift */; };
 		B63807E52D304B5E00505358 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63807DE2D304B5E00505358 /* Renderer.swift */; };
 		B63F83332D303132003212F4 /* Default.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B63F83322D303132003212F4 /* Default.xcconfig */; };
+		B67A87BB2DD656AC000ECDFB /* Batcher.metal in Sources */ = {isa = PBXBuildFile; fileRef = B67A87BA2DD656A9000ECDFB /* Batcher.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B63807DF2D304B5E00505358 /* Shaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
 		B63F82EC2D2FFB20003212F4 /* Metal-Sorting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Sorting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B63F83322D303132003212F4 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
+		B67A87BA2DD656A9000ECDFB /* Batcher.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Batcher.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			children = (
 				B63807DF2D304B5E00505358 /* Shaders.h */,
 				B63807DC2D304B5E00505358 /* Main.metal */,
+				B67A87BA2DD656A9000ECDFB /* Batcher.metal */,
 				B63807DE2D304B5E00505358 /* Renderer.swift */,
 				B63807DD2D304B5E00505358 /* MetalViewController.swift */,
 				B63807DA2D304B5E00505358 /* ContentView.swift */,
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B63807E12D304B5E00505358 /* App.swift in Sources */,
+				B67A87BF2DD7D169000ECDFB /* PrefixSums.swift in Sources */,
 				B63807E22D304B5E00505358 /* ContentView.swift in Sources */,
 				B63807E32D304B5E00505358 /* Main.metal in Sources */,
 				B63807E42D304B5E00505358 /* MetalViewController.swift in Sources */,

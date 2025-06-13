@@ -13,9 +13,12 @@
 #endif
 
 
-struct FragmentUniforms {
-	unsigned long frame_idx _SWIFT_NAME(frameIndex);
+struct MainStepFragmentSortingUniforms {
+	unsigned long p, k;
 };
 
+struct MainFragmentUniforms {
+	unsigned long frame_idx _SWIFT_NAME(frameIndex);
+};
 
 #endif // Shaders_h
