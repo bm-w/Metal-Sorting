@@ -27,3 +27,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 // MARK: - Utilities
 
 func asserted<T>(_ value: T?) -> T? { assert(value != nil); return value }
+func asserted(_ condition: Bool) -> Bool { assert(condition); return condition }

@@ -11,8 +11,15 @@ class Renderer {
 
 	let device: any MTLDevice
 	private let _commandQueue: any MTLCommandQueue
-	private let _computePrefixSums: ComputePrefixSums
+//	private let _computeBitwiseAndOr: ComputeBitwiseAndOr
+//	private let _computeCheckSorted: ComputeCheckSorted
+//	private let _computePrefixSums: ComputePrefixSums
+	private let _computeRadixSort: ComputeRadixSort
 	private let _computePipelineStates: (
+//		debugRadixSort: (
+//			pre: any MTLComputePipelineState,
+//			post: any MTLComputePipelineState
+//		),
 		generateTexture: any MTLComputePipelineState,
 		stepTextureSorting: any MTLComputePipelineState
 	)
@@ -33,6 +40,7 @@ class Renderer {
 			let device = asserted(MTLCreateSystemDefaultDevice()),
 			let library = asserted(device.makeDefaultLibrary()),
 			let commandQueue = asserted(device.makeCommandQueue()),
+			let computeRadixSort = asserted(ComputeRadixSort(device: device, library: library)),
 			let generateTextureComputePipelineState = asserted({ () -> (any MTLComputePipelineState)? in
 				guard let function = asserted(library.makeFunction(name: "main_gen_tex_kernel")) else { return nil }
 				do { return try device.makeComputePipelineState(function: function) }
@@ -72,6 +80,7 @@ class Renderer {
 
 		self.device = device
 		self._commandQueue = commandQueue
+		self._computeRadixSort = computeRadixSort
 		self._computePipelineStates = (
 			generateTextureComputePipelineState,
 			stepTextureSortingComputePipelineState
@@ -91,6 +100,62 @@ class Renderer {
 		defer { captureScope.end(); captureManager.stopCapture() }
 
 		guard let commandBuffer = asserted(self._commandQueue.makeCommandBuffer()) else { return }
+
+		// (Debug) Radix Sort
+		do {
+			let elementsCount = 1 << 20 + 1
+			let keysBufferSize = elementsCount * MemoryLayout<UInt32>.stride
+			let valuesStride = Int(log10(Double(elementsCount)).rounded(.up))
+			let valuesBufferSize = elementsCount * valuesStride
+
+			guard
+				let keysBuffer = asserted(commandBuffer.device.makeBuffer(length: keysBufferSize, options: .storageModeShared)),
+				let valuesBuffer = asserted(commandBuffer.device.makeBuffer(length: valuesBufferSize, options: .storageModeShared))
+			else { return }
+			keysBuffer.label = "Keys (Radix Sort Input/Output)"
+			valuesBuffer.label = "Values (Radix Sort Input/Output)"
+
+			var keysSet = Set<UInt32>()
+			let scrambleOffset = 26561 % elementsCount
+			let scrambleStride = nextCoprime(from: Int(1.61803398875 * Double(elementsCount)), relativeTo: elementsCount)
+			for i in 0..<elementsCount {
+				let key = UInt32((scrambleOffset + scrambleStride * i) % elementsCount)
+				keysSet.insert(key)
+				keysBuffer.contents().bindMemory(to: UInt32.self, capacity: elementsCount)[i] = key
+				let valuePtr = valuesBuffer.contents().bindMemory(to: UInt8.self, capacity: elementsCount * valuesStride) + i * valuesStride
+				let valueString = String(format: "%0\(valuesStride)d", key)
+				for (j, b) in valueString.utf8.enumerated() {
+					valuePtr[j] = b
+				}
+
+				switch key {
+				case let k where k == elementsCount - 1: fallthrough
+				case 0, 1337, 69420: print("\(i): \(key) -> \(valueString.debugDescription)")
+				default: break
+				}
+			}
+			assert(keysSet.count == elementsCount, "Keys buffer must contain all unique keys!")
+
+			self._computeRadixSort.encode(to: commandBuffer, inoutBuffers: .keysAndValues(keys: keysBuffer, values: valuesBuffer, valuesStride: valuesStride))
+
+			commandBuffer.addCompletedHandler() { _ in
+				var incorrect = false
+				for i in 0..<elementsCount {
+					let value = keysBuffer.contents().bindMemory(to: UInt32.self, capacity: elementsCount)[i]
+					if value != UInt32(i) { incorrect = true; break }
+				}
+				print(incorrect ? "Incorrect radix sort output..." : "Correct radix sort output! Yay!!!")
+
+				for i in [0, 1337, 69420, elementsCount - 1] {
+					if i >= elementsCount { continue }
+					let keyPtr = keysBuffer.contents().bindMemory(to: UInt32.self, capacity: elementsCount) + i
+					let valuePtr = valuesBuffer.contents().bindMemory(to: UInt8.self, capacity: elementsCount * valuesStride) + i * valuesStride
+					let valueString = String.init(decoding: UnsafeBufferPointer(start: valuePtr, count: valuesStride), as: UTF8.self)
+					print("\(i)th value in values buffer (key: \(keyPtr.pointee)): \(valueString.debugDescription)")
+				}
+			}
+		}
+
 		guard let commandEncoder = asserted(commandBuffer.makeComputeCommandEncoder()) else { return }
 
 		commandEncoder.setComputePipelineState(self._computePipelineStates.generateTexture)
@@ -100,7 +165,11 @@ class Renderer {
 			return MTLSize(width: width, height: self._computePipelineStates.generateTexture.maxTotalThreadsPerThreadgroup / width, depth: 1)
 		}())
 		commandEncoder.endEncoding()
+
 		commandBuffer.commit()
+		commandBuffer.waitUntilCompleted()
+
+		print("Finished set-up!")
 	}
 
 	func render(
@@ -114,7 +183,7 @@ class Renderer {
 		guard let commandBuffer = asserted(self._commandQueue.makeCommandBuffer()) else { return }
 
 		if self._frameIndex > 0 && self._frameIndex % 10 == 0 && !self._sortingParameters.ended {
-//			print("k: \(self._sortingParameters.k), p: \(self._sortingParameters.p)")
+			print("k: \(self._sortingParameters.k), p: \(self._sortingParameters.p)")
 			guard let commandEncoder = asserted(commandBuffer.makeComputeCommandEncoder()) else { return }
 
 			commandEncoder.setComputePipelineState(self._computePipelineStates.stepTextureSorting)
@@ -175,4 +244,27 @@ func usqrt(_ x: UInt) -> UInt {
 		y += 1
 	}
 	return y - 1
+}
+
+func nextCoprime(from value: Int, relativeTo n: Int) -> Int {
+	var candidate = value
+	while true {
+		if gcd(candidate, n) == 1 {
+			return candidate
+		}
+		candidate += 1
+	}
+}
+
+func gcd(_ m: Int, _ n: Int) -> Int {
+	var a: Int = 0
+	var b: Int = max(m, n)
+	var r: Int = min(m, n)
+
+	while r != 0 {
+		a = b
+		b = r
+		r = a % b
+	}
+	return b
 }

@@ -14,6 +14,15 @@
 		B63807E52D304B5E00505358 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63807DE2D304B5E00505358 /* Renderer.swift */; };
 		B63F83332D303132003212F4 /* Default.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B63F83322D303132003212F4 /* Default.xcconfig */; };
 		B67A87BB2DD656AC000ECDFB /* Batcher.metal in Sources */ = {isa = PBXBuildFile; fileRef = B67A87BA2DD656A9000ECDFB /* Batcher.metal */; };
+		B67A87BD2DD77785000ECDFB /* PrefixSums.metal in Sources */ = {isa = PBXBuildFile; fileRef = B67A87BC2DD77780000ECDFB /* PrefixSums.metal */; };
+		B67A87BF2DD7D169000ECDFB /* PrefixSums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67A87BE2DD7D165000ECDFB /* PrefixSums.swift */; };
+		B67B9EF82DE1002C0032768E /* CheckSorted.metal in Sources */ = {isa = PBXBuildFile; fileRef = B67B9EF72DE100120032768E /* CheckSorted.metal */; };
+		B67B9EFA2DE10D0F0032768E /* CheckSorted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67B9EF92DE10D0C0032768E /* CheckSorted.swift */; };
+		B6C160852DECD1030077F5B7 /* BitwiseAndOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C160842DECD0F70077F5B7 /* BitwiseAndOr.swift */; };
+		B6C160872DECD1100077F5B7 /* BitwiseAndOr.metal in Sources */ = {isa = PBXBuildFile; fileRef = B6C160862DECD10C0077F5B7 /* BitwiseAndOr.metal */; };
+		B6C160892DECE6220077F5B7 /* RadixSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C160882DECE61E0077F5B7 /* RadixSort.swift */; };
+		B6C1C8D52DDC0E080042677E /* BitonicSort.metal in Sources */ = {isa = PBXBuildFile; fileRef = B6C1C8D42DDC0E020042677E /* BitonicSort.metal */; };
+		B6C3EF1F2DDE333A003BCBA4 /* RadixSort.metal in Sources */ = {isa = PBXBuildFile; fileRef = B6C3EF1E2DDE3336003BCBA4 /* RadixSort.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +36,15 @@
 		B63F82EC2D2FFB20003212F4 /* Metal-Sorting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Sorting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B63F83322D303132003212F4 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		B67A87BA2DD656A9000ECDFB /* Batcher.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Batcher.metal; sourceTree = "<group>"; };
+		B67A87BC2DD77780000ECDFB /* PrefixSums.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PrefixSums.metal; sourceTree = "<group>"; };
+		B67A87BE2DD7D165000ECDFB /* PrefixSums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixSums.swift; sourceTree = "<group>"; };
+		B67B9EF72DE100120032768E /* CheckSorted.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CheckSorted.metal; sourceTree = "<group>"; };
+		B67B9EF92DE10D0C0032768E /* CheckSorted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSorted.swift; sourceTree = "<group>"; };
+		B6C160842DECD0F70077F5B7 /* BitwiseAndOr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitwiseAndOr.swift; sourceTree = "<group>"; };
+		B6C160862DECD10C0077F5B7 /* BitwiseAndOr.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BitwiseAndOr.metal; sourceTree = "<group>"; };
+		B6C160882DECE61E0077F5B7 /* RadixSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadixSort.swift; sourceTree = "<group>"; };
+		B6C1C8D42DDC0E020042677E /* BitonicSort.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BitonicSort.metal; sourceTree = "<group>"; };
+		B6C3EF1E2DDE3336003BCBA4 /* RadixSort.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = RadixSort.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +64,15 @@
 				B63807DF2D304B5E00505358 /* Shaders.h */,
 				B63807DC2D304B5E00505358 /* Main.metal */,
 				B67A87BA2DD656A9000ECDFB /* Batcher.metal */,
+				B6C160862DECD10C0077F5B7 /* BitwiseAndOr.metal */,
+				B67A87BC2DD77780000ECDFB /* PrefixSums.metal */,
+				B6C1C8D42DDC0E020042677E /* BitonicSort.metal */,
+				B67B9EF72DE100120032768E /* CheckSorted.metal */,
+				B6C3EF1E2DDE3336003BCBA4 /* RadixSort.metal */,
+				B6C160842DECD0F70077F5B7 /* BitwiseAndOr.swift */,
+				B67A87BE2DD7D165000ECDFB /* PrefixSums.swift */,
+				B67B9EF92DE10D0C0032768E /* CheckSorted.swift */,
+				B6C160882DECE61E0077F5B7 /* RadixSort.swift */,
 				B63807DE2D304B5E00505358 /* Renderer.swift */,
 				B63807DD2D304B5E00505358 /* MetalViewController.swift */,
 				B63807DA2D304B5E00505358 /* ContentView.swift */,
@@ -103,7 +130,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					B63F82EB2D2FFB20003212F4 = {
 						CreatedOnToolsVersion = 16.2;
@@ -145,12 +172,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B67B9EF82DE1002C0032768E /* CheckSorted.metal in Sources */,
 				B63807E12D304B5E00505358 /* App.swift in Sources */,
+				B6C160892DECE6220077F5B7 /* RadixSort.swift in Sources */,
+				B6C160872DECD1100077F5B7 /* BitwiseAndOr.metal in Sources */,
 				B67A87BF2DD7D169000ECDFB /* PrefixSums.swift in Sources */,
 				B63807E22D304B5E00505358 /* ContentView.swift in Sources */,
+				B6C1C8D52DDC0E080042677E /* BitonicSort.metal in Sources */,
+				B6C160852DECD1030077F5B7 /* BitwiseAndOr.swift in Sources */,
 				B63807E32D304B5E00505358 /* Main.metal in Sources */,
+				B67A87BD2DD77785000ECDFB /* PrefixSums.metal in Sources */,
+				B6C3EF1F2DDE333A003BCBA4 /* RadixSort.metal in Sources */,
+				B67A87BB2DD656AC000ECDFB /* Batcher.metal in Sources */,
 				B63807E42D304B5E00505358 /* MetalViewController.swift in Sources */,
 				B63807E52D304B5E00505358 /* Renderer.swift in Sources */,
+				B67B9EFA2DE10D0F0032768E /* CheckSorted.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +228,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -255,7 +290,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -283,7 +317,6 @@
 				CODE_SIGN_ENTITLEMENTS = Application/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -321,7 +354,6 @@
 				CODE_SIGN_ENTITLEMENTS = Application/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
